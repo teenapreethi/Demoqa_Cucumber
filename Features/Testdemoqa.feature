@@ -18,4 +18,3 @@ Scenario: Validate the DemoQa Website Country as Afghanistan by default
 
 When The user checks the default value for country is Afghanistan
 Then The user verifies the default value for country is Afghanistan
-

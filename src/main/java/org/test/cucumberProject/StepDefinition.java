@@ -13,6 +13,10 @@ import cucumber.api.java.en.When;
 
 public class StepDefinition {
 	WebDriver driver;
+	String selectedValue;
+	Select s;
+	WebElement firstSelectedOption;
+	String Value;
 
 	@Given("^The user is in DemoQa website$")
 	public void the_user_is_in_DemoQa_website() throws Throwable {
@@ -32,7 +36,7 @@ public class StepDefinition {
 	public void the_user_verifies_the_firstname_and_lastname() throws Throwable {
 		Assert.assertEquals("Teena Preethi", driver.findElement(By.id("name_3_firstname")).getAttribute("value"));
 		Assert.assertEquals("Gopi", driver.findElement(By.id("name_3_lastname")).getAttribute("value"));
-		 driver.quit();
+		driver.quit();
 	}
 
 	@When("^The user selects Marital Status as Single$")
@@ -51,19 +55,19 @@ public class StepDefinition {
 		Assert.assertEquals("Single", driver.findElement(By.xpath("//label[text()='Single']")).getText());
 		Assert.assertEquals("Dance", driver.findElement(By.xpath("//label[text()='Dance']")).getText());
 		Assert.assertEquals("Reading", driver.findElement(By.xpath("//label[text()='Reading']")).getText());
-		 driver.quit();
+		driver.quit();
 	}
 
 	@When("^The user checks the default value for country is Afghanistan$")
 	public void the_user_checks_the_default_value_for_country_is_Afghanistan() throws Throwable {
-		WebElement dropDown = driver.findElement(By.id("dropdown_7"));
-		Select s = new Select(dropDown);
-		s.getFirstSelectedOption().getText();
+		s= new Select (driver.findElement(By.id("dropdown_7")));
+		firstSelectedOption = s.getFirstSelectedOption();
+		Value = firstSelectedOption.getText();
 	}
 
 	@Then("^The user verifies the default value for country is Afghanistan$")
 	public void the_user_verifies_the_default_value_for_country_is_Afghanistan() throws Throwable {
-		Assert.assertEquals("Afghanistan", driver.findElement(By.xpath("//option[text()='Afghanistan']")).getText());
+		Assert.assertEquals("Afghanistan", Value);
 		driver.quit();
 	}
 
